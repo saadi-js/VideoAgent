@@ -2,7 +2,12 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts  import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableLambda, RunnablePassthrough
-from core.vectorstore import build_vector_store, load_vector_store, get_retriever
+from core.vectorstore import (
+    build_vector_store,
+    load_vector_store,
+    get_retriever,
+    vector_store_exists,
+)
 
 
 import os
@@ -15,8 +20,12 @@ def format_docs(docs):
     return "\n\n".join([f"\n{doc.page_content}" for doc in docs])
 
 
-def build_rag_chain(transcript:str):
-    vector_store=build_vector_store(transcript)
+def build_rag_chain(transcript: str, source_key: str = "default"):
+    if vector_store_exists(source_key, transcript):
+        print(f"Using cached vector store: {source_key}")
+        vector_store = load_vector_store(source_key)
+    else:
+        vector_store = build_vector_store(transcript, source_key)
 
     retriever=get_retriever(vector_store,k=4)
 
@@ -57,8 +66,8 @@ Context from meeting transcript:
 
     return rag_chain
 
-def load_rag_chain():
-    vector_store=load_vector_store()
+def load_rag_chain(source_key: str = "default"):
+    vector_store=load_vector_store(source_key)
 
     retriever=get_retriever(vector_store,k=4)
 
