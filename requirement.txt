@@ -1,0 +1,48 @@
+# AI Meeting Assistant
+# Python >= 3.10 recommended
+
+# Audio / Video acquisition
+yt-dlp==2026.10.26
+pydub==0.25.1
+ffmpeg-python==0.2.0
+audioop-lts==0.2.2; python_version >= "3.13"
+
+# Speech-to-Text (local Whisper)
+openai-whisper==20250625
+torch==2.15.0
+torchaudio==2.11.1
+
+# Translation (Hindi -> English)
+deep-translator==1.11.4
+
+# LLM orchestration - LangChain LCEL + Google Gemini API
+langchain==1.4.8
+langchain-core==1.7.4
+langchain-community==0.4.2
+langchain-google-genai==4.4.2
+google-genai==2.34.0
+langchain-chroma==1.1.0
+langchain-ollama==1.1.0
+ollama==0.6.3
+
+# RAG pipeline
+chromadb==1.5.9
+sentence-transformers==6.2.0
+langchain-huggingface==1.2.3
+huggingface-hub==1.33.0
+tiktoken==0.14.0
+
+# Streamlit UI
+streamlit==1.66.1
+streamlit-extras==1.6.0
+watchdog==6.0.0
+
+# PDF & TXT export
+reportlab==5.1.0
+fpdf2==2.9.0
+
+# Utilities
+python-dotenv==1.2.4
+numpy==2.5.4
+tqdm==4.70.1
+requests==2.34.2
