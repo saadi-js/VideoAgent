@@ -56,7 +56,7 @@ def run_pipeline(source:str)->dict:
 
     transcript=get_or_create_transcript(chunks, source, translate=True)
 
-    print(f"Raw transcript generated. {transcript[:100]}")
+    print(f"Raw transcript generated. {transcript[:300]}")
 
     title=generate_title(transcript)
 
@@ -97,6 +97,7 @@ if __name__ == "__main__":
     # Phase 2 — Chat with your meeting via RAG
     print("\n💬 Chat with your meeting (type 'exit' to quit)\n")
     rag_chain = result["rag_chain"]
+    session_id = get_source_cache_key(source)
     while True:
         question = input("You: ").strip()
         if question.lower() in ["exit", "quit", "q"]:
@@ -104,6 +105,5 @@ if __name__ == "__main__":
             break
         if not question:
             continue
-        answer = ask_question(rag_chain, question)
+        answer = ask_question(rag_chain, question, session_id=session_id)
         print(f"\n🤖 Assistant: {answer}\n")
-
