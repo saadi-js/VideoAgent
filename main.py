@@ -82,7 +82,7 @@ def run_pipeline(source:str)->dict:
 
 
 if __name__ == "__main__":
-    # CLI entry point
+    
     source = input("Enter YouTube URL or local file path: ").strip()
     result = run_pipeline(source)
 
